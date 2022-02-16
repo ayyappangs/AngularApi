@@ -20,6 +20,8 @@ namespace PaylocityApi
             builder.Services.TryAddTransient<IPaylocityDatabase, PaylocityDatabase>();
             builder.Services.TryAddTransient<IEmployeeRepository, EmployeeRepository>();
             builder.Services.TryAddTransient<IEmployeeService, EmployeeService>();
+            builder.Services.TryAddTransient<ICalculationService, CalculationService>();
+            builder.Services.TryAddTransient<IBenefitsService, BenefitsService>();
         }
     }
 }

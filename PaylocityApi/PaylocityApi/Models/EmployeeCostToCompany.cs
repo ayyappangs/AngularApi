@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace PaylocityApi.Models
 {
-    public class Employee
+    public  class EmployeeCostToCompany
     {
         public int EmployeeId { get; set; }
-        
-        public string FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public decimal Salary { get; set; }
 
-        public List<Dependent> Dependents { get; set; }
+        public decimal Benefits { get; set; }
+
+        public decimal CostToCompany { get; set; }
     }
 }

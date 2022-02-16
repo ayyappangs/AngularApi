@@ -10,34 +10,37 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using PaylocityApi.Models;
 using PaylocityApi.Services;
 
 namespace PaylocityApi
 {
-    public class Employees
+    public class CostToCompany
     {
-        private readonly ILogger<Employees> _logger;
-        private readonly IEmployeeService employeeService;
+        private readonly ILogger<CostToCompany> _logger;
+        private readonly ICalculationService calculationService;
 
-        public Employees(ILogger<Employees> log, IEmployeeService employeeService)
+        public CostToCompany(ILogger<CostToCompany> log, ICalculationService calculationService)
         {
             _logger = log;
-            this.employeeService = employeeService;
+            this.calculationService = calculationService;
         }
 
-        [FunctionName("Employees")]
+        [FunctionName("CostToCompany")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            //var employees = await employeeService.GetEmployees();
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            Employee employee = JsonConvert.DeserializeObject<Employee>(requestBody);
 
-            return new OkObjectResult("");
+            var employeeCostToCompany = calculationService.Calculate(employee);
+
+            return new OkObjectResult(employeeCostToCompany);
         }
     }
 }
