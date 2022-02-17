@@ -26,3 +26,6 @@ jobs:
     - name: Test
       working-directory: PaylocityApi/PaylocityApi/
       run: dotnet test --no-build --verbosity normal
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1.28
+
