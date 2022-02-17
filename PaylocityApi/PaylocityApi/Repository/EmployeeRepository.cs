@@ -18,12 +18,12 @@ namespace PaylocityApi.Repository
             this.paylocityDatabase = paylocityDatabase;
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IEnumerable<EmployeeCostToCompany>> GetEmployees()
         {
-            var query = "SELECT EmployeeId,FirstName,LastName FROM Employee";
+            var query = "SELECT EmployeeId,EmployeeName,DependentName1,DependentName2,DependentName3,DependentName4,Salary,Benefits,CostToCompany,UpdatedDate FROM EmployeeCostToCompany";
             using (var connection = paylocityDatabase.CreateConnection())
             {
-                var companies = await connection.QueryAsync<Employee>(query);
+                var companies = await connection.QueryAsync<EmployeeCostToCompany>(query);
                 return companies.ToList();
             }
         }

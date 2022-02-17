@@ -9,6 +9,6 @@ namespace PaylocityApi.Repository
 {
     public interface IEmployeeRepository
     {
-        Task<IEnumerable<Employee>> GetEmployees();
+        Task<IEnumerable<EmployeeCostToCompany>> GetEmployees();
     }
 }

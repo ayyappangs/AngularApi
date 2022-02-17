@@ -17,7 +17,7 @@ namespace PaylocityApi.Services
             this.employeeRepository = employeeRepository;
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IEnumerable<EmployeeCostToCompany>> GetEmployees()
         {
             return await employeeRepository.GetEmployees();
         }

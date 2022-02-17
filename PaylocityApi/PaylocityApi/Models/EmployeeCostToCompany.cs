@@ -10,10 +10,20 @@ namespace PaylocityApi.Models
     {
         public int EmployeeId { get; set; }
 
-        public decimal Salary { get; set; }
+        public string EmployeeName { get; set; }
 
-        public decimal Benefits { get; set; }
+        public string DependentName1 { get; set; }
 
-        public decimal CostToCompany { get; set; }
+        public string DependentName2 { get; set; }
+
+        public string DependentName3 { get; set; }
+
+        public string DependentName4 { get; set; }
+
+        public double Salary { get; set; }
+
+        public double Benefits { get; set; }
+
+        public double CostToCompany { get; set; }
     }
 }

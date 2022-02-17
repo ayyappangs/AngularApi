@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaylocityApi", "PaylocityApi\PaylocityApi.csproj", "{D70182F2-2C2E-4513-81C0-08F517245376}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaylocityApi.Tests", "PaylocityApi.Tests\PaylocityApi.Tests.csproj", "{60B89B1F-E94A-4CC7-8067-7B4C72F91747}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D70182F2-2C2E-4513-81C0-08F517245376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D70182F2-2C2E-4513-81C0-08F517245376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D70182F2-2C2E-4513-81C0-08F517245376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B89B1F-E94A-4CC7-8067-7B4C72F91747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B89B1F-E94A-4CC7-8067-7B4C72F91747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B89B1F-E94A-4CC7-8067-7B4C72F91747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B89B1F-E94A-4CC7-8067-7B4C72F91747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

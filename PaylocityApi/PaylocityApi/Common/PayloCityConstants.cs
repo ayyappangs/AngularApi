@@ -8,11 +8,11 @@ namespace PaylocityApi.Common
 {
     public  class PayloCityConstants
     {
-        public const decimal EmployeeSalary = 2000;
+        public const double EmployeeSalary = 2000;
 
         public const int NumberOfPayChecks = 26;
 
-        public const decimal DiscountPercent = (10/100);
+        public const double DiscountPercent = (double)10/100;
 
         public const int EmployeeBenefitCost = 1000;
 

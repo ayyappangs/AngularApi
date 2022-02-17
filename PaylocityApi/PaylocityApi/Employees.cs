@@ -35,9 +35,9 @@ namespace PaylocityApi
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            //var employees = await employeeService.GetEmployees();
+            var employees = await employeeService.GetEmployees();
 
-            return new OkObjectResult("");
+            return new OkObjectResult(employees);
         }
     }
 }

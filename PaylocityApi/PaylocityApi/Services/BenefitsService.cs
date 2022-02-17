@@ -10,24 +10,38 @@ namespace PaylocityApi.Services
 {
     public class BenefitsService : IBenefitsService
     {
-        public decimal GetDependentBenfitsCost(List<Dependent> dependents)
+        public double GetDependentBenfitsCost(List<Dependent> dependents)
         {
+            if(dependents == null || dependents.Count ==0)
+                return 0;
 
-            int countWithANames = dependents.Where(x => x.Name.ToLower().StartsWith(PayloCityConstants.SmallA)).Count();
+            int countWithANames = dependents.Where(x => !string.IsNullOrEmpty(x.Name) && x.Name.ToLower().StartsWith(PayloCityConstants.SmallA)).Count();
             
             int countOthers = dependents.Where(x=> !string.IsNullOrEmpty(x.Name)).Count() - countWithANames;
 
             return GetDependentBenefits(countOthers) + GetDependentBenefitsNameStartsWithA(countWithANames);
         }
 
-        private decimal GetDependentBenefits(int count)
+        private double GetDependentBenefits(int count)
         {
             return count * PayloCityConstants.DependentBenefitCost;
         }
 
-        private decimal GetDependentBenefitsNameStartsWithA(int count)
+        private double GetDependentBenefitsNameStartsWithA(int count)
         {
-            return count * (PayloCityConstants.DependentBenefitCost * PayloCityConstants.DiscountPercent);
+            return count * (PayloCityConstants.DependentBenefitCost -(PayloCityConstants.DependentBenefitCost * PayloCityConstants.DiscountPercent));
+        }
+
+        public double GetEmployeeBenefits(string employeeName)
+        {
+            if (employeeName.ToLower().StartsWith(PayloCityConstants.SmallA))
+            {
+                return (PayloCityConstants.EmployeeBenefitCost - (PayloCityConstants.EmployeeBenefitCost * PayloCityConstants.DiscountPercent));
+            }
+            else
+            {
+                return PayloCityConstants.EmployeeBenefitCost;
+            }
         }
     }
 }

@@ -3,3 +3,5 @@
 ################################################################################
 
 /PaylocityApi/.vs/PaylocityApi
+/PaylocityApi/PaylocityApi.Tests/bin/Debug/net6.0
+/PaylocityApi/PaylocityApi.Tests/obj

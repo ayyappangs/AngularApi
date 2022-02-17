@@ -9,6 +9,8 @@ namespace PaylocityApi.Services
 {
     public interface IBenefitsService
     {
-        decimal GetDependentBenfitsCost(List<Dependent> dependents);
+        double GetDependentBenfitsCost(List<Dependent> dependents);
+
+        double GetEmployeeBenefits(string employeeName);
     }
 }

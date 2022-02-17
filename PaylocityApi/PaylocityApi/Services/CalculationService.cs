@@ -21,13 +21,13 @@ namespace PaylocityApi.Services
         {
             EmployeeCostToCompany employeeCostToCompany = new EmployeeCostToCompany();            
 
-            var costOfBenefits = PayloCityConstants.EmployeeBenefitCost + benefitsService.GetDependentBenfitsCost(employee.Dependents);
+            var costOfBenefits = benefitsService.GetEmployeeBenefits(employee.FirstName) + benefitsService.GetDependentBenfitsCost(employee.Dependents);
 
             var salary = CalculateSalary();
 
             var costToCompany = salary + costOfBenefits;
 
-            employeeCostToCompany.EmployeeId = employee.EmployeeId;
+            employeeCostToCompany.EmployeeId = new Random().Next();
 
             employeeCostToCompany.Benefits = costOfBenefits;
 
@@ -39,7 +39,7 @@ namespace PaylocityApi.Services
         }
         
 
-        private decimal CalculateSalary()
+        private double CalculateSalary()
         {
             return PayloCityConstants.EmployeeSalary * PayloCityConstants.NumberOfPayChecks;
         }
