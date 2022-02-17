@@ -16,10 +16,10 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
-        working-directory: PaylocityApi/PaylocityApi/
+        dotnet-version: 5.0.x        
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: PaylocityApi/PaylocityApi/
     - name: Build
       run: dotnet build --no-restore
     - name: Test
