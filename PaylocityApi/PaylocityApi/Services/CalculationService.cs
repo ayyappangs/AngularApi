@@ -19,23 +19,32 @@ namespace PaylocityApi.Services
 
         public EmployeeCostToCompany Calculate(Employee employee)
         {
-            EmployeeCostToCompany employeeCostToCompany = MapNames(employee);            
+            try
+            {
+                EmployeeCostToCompany employeeCostToCompany = MapNames(employee);
 
-            var costOfBenefits = benefitsService.GetEmployeeBenefits(employee.FirstName) + benefitsService.GetDependentBenfitsCost(employee.Dependents);
+                var costOfBenefits = benefitsService.GetEmployeeBenefits(employee.FirstName) + benefitsService.GetDependentBenfitsCost(employee.Dependents);
 
-            var salary = CalculateSalary();
+                var salary = CalculateSalary();
 
-            var costToCompany = salary + costOfBenefits;
+                var costToCompany = salary + costOfBenefits;
 
-            employeeCostToCompany.EmployeeId = new Random().Next();
+                employeeCostToCompany.EmployeeId = new Random().Next();
 
-            employeeCostToCompany.Benefits = costOfBenefits;
+                employeeCostToCompany.Benefits = costOfBenefits;
 
-            employeeCostToCompany.Salary = salary;
+                employeeCostToCompany.Salary = salary;
 
-            employeeCostToCompany.CostToCompany = costToCompany;
+                employeeCostToCompany.CostToCompany = costToCompany;
 
-            return employeeCostToCompany;
+                return employeeCostToCompany;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         //This is not good interms of domain model. :) 
