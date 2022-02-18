@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using PaylocityApi;
 using PaylocityApi.Repository;
 using PaylocityApi.Services;
+using PaylocityApi.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace PaylocityApi
             builder.Services.TryAddTransient<IEmployeeService, EmployeeService>();
             builder.Services.TryAddTransient<ICalculationService, CalculationService>();
             builder.Services.TryAddTransient<IBenefitsService, BenefitsService>();
+            builder.Services.TryAddTransient<IEmployeeValidator, EmployeeValidator>();
         }
     }
 }

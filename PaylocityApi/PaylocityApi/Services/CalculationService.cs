@@ -19,7 +19,7 @@ namespace PaylocityApi.Services
 
         public EmployeeCostToCompany Calculate(Employee employee)
         {
-            EmployeeCostToCompany employeeCostToCompany = new EmployeeCostToCompany();            
+            EmployeeCostToCompany employeeCostToCompany = MapNames(employee);            
 
             var costOfBenefits = benefitsService.GetEmployeeBenefits(employee.FirstName) + benefitsService.GetDependentBenfitsCost(employee.Dependents);
 
@@ -37,7 +37,20 @@ namespace PaylocityApi.Services
 
             return employeeCostToCompany;
         }
-        
+
+        //This is not good interms of domain model. :) 
+        private EmployeeCostToCompany MapNames(Employee employee)
+        {
+            EmployeeCostToCompany employeeCostToCompany = new EmployeeCostToCompany();
+            employeeCostToCompany.EmployeeName = employee.FirstName;
+            employeeCostToCompany.DependentName1 = employee.Dependents[0].Name;
+            employeeCostToCompany.DependentName2 = employee.Dependents[1].Name;
+            employeeCostToCompany.DependentName3 = employee.Dependents[2].Name;
+            employeeCostToCompany.DependentName4 = employee.Dependents[3].Name;
+
+            return employeeCostToCompany;
+        }
+
 
         private double CalculateSalary()
         {

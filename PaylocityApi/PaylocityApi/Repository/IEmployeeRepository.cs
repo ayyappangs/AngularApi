@@ -10,5 +10,7 @@ namespace PaylocityApi.Repository
     public interface IEmployeeRepository
     {
         Task<IEnumerable<EmployeeCostToCompany>> GetEmployees();
+
+        Task SaveEmployee(EmployeeCostToCompany employeeCostToCompany);
     }
 }

@@ -21,5 +21,10 @@ namespace PaylocityApi.Services
         {
             return await employeeRepository.GetEmployees();
         }
+
+        public async Task SaveEmployee(EmployeeCostToCompany employee)
+        {
+            await employeeRepository.SaveEmployee(employee);
+        }
     }
 }

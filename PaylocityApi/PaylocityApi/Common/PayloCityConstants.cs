@@ -20,5 +20,7 @@ namespace PaylocityApi.Common
 
         public const string SmallA = "a";
 
+        public const string BadRequestError = "Invlid Employee Details";
+
     }
 }

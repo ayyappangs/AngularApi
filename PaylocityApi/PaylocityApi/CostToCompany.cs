@@ -10,8 +10,10 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using PaylocityApi.Common;
 using PaylocityApi.Models;
 using PaylocityApi.Services;
+using PaylocityApi.Validators;
 
 namespace PaylocityApi
 {
@@ -19,11 +21,13 @@ namespace PaylocityApi
     {
         private readonly ILogger<CostToCompany> _logger;
         private readonly ICalculationService calculationService;
+        private readonly IEmployeeValidator employeeValidator;
 
-        public CostToCompany(ILogger<CostToCompany> log, ICalculationService calculationService)
+        public CostToCompany(ILogger<CostToCompany> log, ICalculationService calculationService, IEmployeeValidator employeeValidator)
         {
             _logger = log;
             this.calculationService = calculationService;
+            this.employeeValidator = employeeValidator;
         }
 
         [FunctionName("CostToCompany")]
@@ -34,13 +38,30 @@ namespace PaylocityApi
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req)
         {
+            try
+            {
+                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                Employee employee = JsonConvert.DeserializeObject<Employee>(requestBody);
+                if (employeeValidator.IsValidEmployee(employee))
+                {
+                    var employeeCostToCompany = calculationService.Calculate(employee);
+
+                    return new OkObjectResult(employeeCostToCompany);
+                }
+                else
+                {
+                    return new BadRequestObjectResult(PayloCityConstants.BadRequestError);
+                }
+                
+            }
+            catch (System.Exception ex)
+            {
+                var errorObjectResult = new ObjectResult(ex);
+                errorObjectResult.StatusCode = StatusCodes.Status500InternalServerError;
+                return errorObjectResult;
+            }
                
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            Employee employee = JsonConvert.DeserializeObject<Employee>(requestBody);
-
-            var employeeCostToCompany = calculationService.Calculate(employee);
-
-            return new OkObjectResult(employeeCostToCompany);
+            
         }
     }
 }
